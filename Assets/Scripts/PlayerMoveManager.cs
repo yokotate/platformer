@@ -46,15 +46,14 @@ public class PlayerMoveManager : MonoBehaviour
     }
 
     void IsJumpReady(){
-        var originPos = transform.position;
+        // ビームの開始地点を算出している
+        var originPos = this.transform.position;
         originPos = new Vector2(originPos.x - 0.5f, originPos.y - 1.01f);
+
         RaycastHit2D hit = Physics2D.Raycast(originPos, transform.right, 1f);
-        if(hit.collider != null){
-            if(hit.collider.gameObject.CompareTag("Ground")){
-                isJumpReady = true;
-            }else{
-                isJumpReady = false;
-            }
+
+        if(hit.collider != null && hit.collider.gameObject.CompareTag("Ground")){
+            isJumpReady = true;
         }else{
             isJumpReady = false;
         }
